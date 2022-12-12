@@ -6,6 +6,9 @@ import 'delayed_animation.dart';
 import 'main.dart';
 import 'document_page.dart';
 
+var mail = '';
+var password = '';
+
 class ConnexionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -64,10 +67,10 @@ class ConnexionPage extends StatelessWidget {
                     ),
                     child: Text("Connexion", textScaleFactor: 1.5,),
                     onPressed: () {
-                      Navigator.push(
+                      mail == "Notario@gmail.com" && password == "Notario" ? Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => DocumentPage()),
-                      );
+                      ) : print("Erreur");
                     },
                   ),
                 )
@@ -88,8 +91,6 @@ class ConnexionForm extends StatefulWidget {
 
 class _ConnexionFormState extends State<ConnexionForm> {
   var _obscureText2 = true;
-  var mail = '';
-  var password = '';
   @override
   Widget build(BuildContext context) {
     return Container(
