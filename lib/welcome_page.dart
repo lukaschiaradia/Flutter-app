@@ -12,6 +12,7 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.symmetric(
@@ -23,6 +24,10 @@ class WelcomePage extends StatelessWidget {
               DelayedAnimation(
                 delay: 200,
                 child: Container(
+                  margin: EdgeInsets.only(
+                    top: 0,
+                    bottom: 40,
+                  ),
                   height: 170,
                   child: Image.asset('images/notario.png'),
                 )
@@ -31,7 +36,7 @@ class WelcomePage extends StatelessWidget {
                 delay: 300,
                 child: Container(
                   height: 400,
-                  child: Image.asset('images/shrek.jpeg'),
+                  child: Image.asset('images/man.png', scale: 1.5),
                 )
               ),
               DelayedAnimation(

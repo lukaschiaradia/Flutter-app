@@ -88,6 +88,8 @@ class ConnexionForm extends StatefulWidget {
 
 class _ConnexionFormState extends State<ConnexionForm> {
   var _obscureText2 = true;
+  var mail = '';
+  var password = '';
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -106,6 +108,7 @@ class _ConnexionFormState extends State<ConnexionForm> {
                     color: Colors.grey,
                   ),
                 ),
+                onChanged: (value) => mail = value,
               )
             ),
             SizedBox(height: 30),
@@ -135,6 +138,7 @@ class _ConnexionFormState extends State<ConnexionForm> {
                       },
                     ),
                   ),
+                  onChanged: (value) => password = value,
                 )
               )
             ),

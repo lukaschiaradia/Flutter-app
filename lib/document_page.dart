@@ -28,19 +28,35 @@ class _DocumentPageState extends State<DocumentPage> {
         selectedItemColor: blue_color,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(IconData(0xe2a3, fontFamily: 'MaterialIcons')),
+            icon: ImageIcon(
+                size: 40,
+                AssetImage("images/folder-white.png"),
+                color: Color.fromARGB(255, 0, 0, 0),
+            ),
             label: 'Documents',
           ),
           BottomNavigationBarItem(
-            icon: Icon(IconData(0xf051f, fontFamily: 'MaterialIcons')),
+            icon: ImageIcon(
+                size: 40,
+                AssetImage("images/planning-white.png"),
+                color: Color.fromARGB(255, 0, 0, 0),
+            ),
             label: 'Agenda',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
+            icon: ImageIcon(
+                size: 40,
+                AssetImage("images/tchat.png"),
+                color: Color.fromARGB(255, 0, 0, 0),
+            ),
             label: 'FAQ',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
+            icon: ImageIcon(
+                size: 40,
+                AssetImage("images/profil-white.png"),
+                color: Color.fromARGB(255, 0, 0, 0),
+            ),
             label: 'Profil',
           ),
         ],
@@ -113,24 +129,32 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       thumbVisibility: true,
       child: GridView.builder(
         controller: _controllerOne,
-        itemCount: 9,
+        itemCount: 3,
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         gridDelegate:
             const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemBuilder: (BuildContext context, int index) {
           return Center(
-             child: Column(
+            child: Column(
             children: [
+              SizedBox(
+                height: 60,
+              ),
             DelayedAnimation(
                 delay: 300,
-                child: Container(
-                  margin: EdgeInsets.only(
-                    top: 50,
-                    bottom: 0,
+                child: InkWell(
+                  onTap: () {
+                    OpenFile.open("images/zebi.pdf");
+                  }, // Image tapped
+                  splashColor: blue_color, // Splash color over image
+                  child: Ink.image(
+                    width: 100,
+                    height: 100,
+                    image: AssetImage(
+                      "images/pdf.png",
+                    ),
                   ),
-                  height: 90,
-                  child: Image.asset('images/pdf.png'),
                 )
               ),
             ],
