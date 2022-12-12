@@ -4,24 +4,21 @@ import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
 import 'delayed_animation.dart';
 import 'main.dart';
-import 'package:open_file/open_file.dart';
-import 'package:file_picker/file_picker.dart';
-import 'profil_page.dart';
+import 'document_page.dart';
 
-class DocumentPage extends StatefulWidget {
-  const DocumentPage();
+class ProfilPage extends StatefulWidget {
+  const ProfilPage();
 
   @override
-  _DocumentPageState createState() => _DocumentPageState();
+  _ProfilPageState createState() => _ProfilPageState();
 }
 
-class _DocumentPageState extends State<DocumentPage> {
+class _ProfilPageState extends State<ProfilPage> {
 
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: MyStatefulWidget(),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
@@ -82,14 +79,14 @@ class _DocumentPageState extends State<DocumentPage> {
   }
 }
 
-class Document extends StatefulWidget {
-  const Document();
+class Profil extends StatefulWidget {
+  const Profil();
 
   @override
-  _DocumentState createState() => _DocumentState();
+  _ProfilState createState() => _ProfilState();
 }
 
-class _DocumentState extends State<Document> {
+class _ProfilState extends State<Profil> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -107,7 +104,7 @@ class _DocumentState extends State<Document> {
                     bottom: 0,
                   ),
                   child: Text(
-                    "Mes Documents",
+                    "Profil",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       decoration: TextDecoration.underline,
@@ -122,62 +119,4 @@ class _DocumentState extends State<Document> {
       ),
     );
   }
-}
-
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({super.key});
-
-  @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
-}
-
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  final ScrollController _controllerOne = ScrollController();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scrollbar(
-      controller: _controllerOne,
-      thumbVisibility: true,
-      child: GridView.builder(
-        controller: _controllerOne,
-        itemCount: 3,
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        gridDelegate:
-            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemBuilder: (BuildContext context, int index) {
-          return Center(
-            child: Column(
-            children: [
-              SizedBox(
-                height: 60,
-              ),
-            DelayedAnimation(
-                delay: 300,
-                child: InkWell(
-                  onTap: () {
-                    OpenFile.open("images/zebi.pdf");
-                  }, // Image tapped
-                  splashColor: blue_color, // Splash color over image
-                  child: Ink.image(
-                    width: 100,
-                    height: 100,
-                    image: AssetImage(
-                      "images/pdf.png",
-                    ),
-                  ),
-                )
-              ),
-            ],
-             ),
-          );
-        },
-      ),
-    );
-  }
-}
-
-void openFile(PlatformFile file) {
-  OpenFile.open(file.path);
 }
