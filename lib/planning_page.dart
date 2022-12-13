@@ -30,34 +30,36 @@ class Planning extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.all(10),
-        color: Colors.white,
-        child: Column(
-          children: [
-            Container(
-              color: Colors.white,
-              height: 50,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Mes rendez-vous',
-                    style: TextStyle(
-                      fontSize: 30,
-                      color: blue_color,
-                      decoration: TextDecoration.underline,
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(10),
+          color: Colors.white,
+          child: Column(
+            children: [
+              Container(
+                color: Colors.white,
+                height: 50,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Mes rendez-vous',
+                      style: TextStyle(
+                        fontSize: 30,
+                        color: blue_color,
+                        decoration: TextDecoration.underline,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            Column(
-              children: rdvList.map((rdv) {
-                return rdvCard(rdv);
-              }).toList(),
-            ),
-          ],
+              Column(
+                children: rdvList.map((rdv) {
+                  return rdvCard(rdv);
+                }).toList(),
+              ),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: ButtonNavBar(),
