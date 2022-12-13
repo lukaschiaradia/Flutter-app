@@ -4,29 +4,31 @@ import 'dart:async';
 import 'delayed_animation.dart';
 import 'main.dart';
 import 'name_page.dart';
+import 'api.dart';
+import 'document_page.dart';
 
 class PasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white.withOpacity(0),
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-            size: 30,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.white.withOpacity(0),
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+              size: 30,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            DelayedAnimation(
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              DelayedAnimation(
                 delay: 200,
                 child: Container(
                   height: 100,
@@ -34,20 +36,18 @@ class PasswordPage extends StatelessWidget {
                     top: 40,
                     bottom: 0,
                   ),
-                  child: Text(
-                    "Entrez votre mot de passe",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.poppins(
-                      color: Colors.black,
-                      fontSize:25,
-                    )
-                  ),
+                  child: Text("Entrez votre mot de passe",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.poppins(
+                        color: Colors.black,
+                        fontSize: 25,
+                      )),
                 ),
-            ),
-            SizedBox(height: 35),
-            PasswordForm(),
-            SizedBox(height: 35),
-            DelayedAnimation(
+              ),
+              SizedBox(height: 35),
+              PasswordForm(),
+              SizedBox(height: 35),
+              DelayedAnimation(
                 delay: 300,
                 child: Container(
                   height: 50,
@@ -59,30 +59,52 @@ class PasswordPage extends StatelessWidget {
                     "images/progression4.png",
                   ),
                 ),
-            ),
-            DelayedAnimation(
-                delay: 500,
-                child: Container(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: blue_color,
-                      padding: EdgeInsets.symmetric(
-                        vertical: 20,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                    ),
-                    child: Text("Continuer", textScaleFactor: 1.5,),
-                    onPressed: () {},
-                  ),
-                )
               ),
-          ],
-        ),
-      )
-    );
+              DelayedAnimation(
+                  delay: 500,
+                  child: Container(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: blue_color,
+                        padding: EdgeInsets.symmetric(
+                          vertical: 20,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                      ),
+                      child: Text(
+                        "Continuer",
+                        textScaleFactor: 1.5,
+                      ),
+                      onPressed: () {
+                      var ret = Future(() =>
+                            api_register(
+                                email: email,
+                                password: password,
+                                password_confirm: password_confirm,
+                                phone: "0753462345",
+                                firstName: firstName,
+                                LastName: LastName,
+                                age: age));
+                        ret.then((value) {
+                          if (value == 200) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DocumentPage()),
+                            );
+                          } else {
+                            print("Erreur");
+                          }
+                        });
+                      },
+                    ),
+                  )),
+            ],
+          ),
+        ));
   }
 }
 
@@ -105,7 +127,7 @@ class _PasswordFormState extends State<PasswordForm> {
       child: Column(
         children: [
           SizedBox(height: 30),
-            DelayedAnimation(
+          DelayedAnimation(
               delay: 300,
               child: TextField(
                 obscureText: _obscureText1,
@@ -115,49 +137,51 @@ class _PasswordFormState extends State<PasswordForm> {
                     color: Colors.grey,
                   ),
                   suffixIcon: IconButton(
-                    icon: Icon(
-                      _obscureText1 == false ? Icons.visibility_off : Icons.visibility,
-                      color: Colors.black,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _obscureText1 = !_obscureText1;
-                      });
-                      }
-                  ),
-                ),
-              )
-            ),
-            SizedBox(height: 30),
-            DelayedAnimation(
-              delay: 300,
-              child: Container(
-                margin: EdgeInsets.only(
-                  top: 0,
-                  bottom: 130,
-                ),
-                child: TextField(
-                  obscureText: _obscureText2,
-                  decoration: InputDecoration(
-                    labelText: 'Confirmer le mot de passe',
-                    labelStyle: TextStyle(
-                      color: Colors.grey,
-                    ),
-                    suffixIcon: IconButton(
                       icon: Icon(
-                        _obscureText2 == false ? Icons.visibility_off : Icons.visibility,
+                        _obscureText1 == false
+                            ? Icons.visibility_off
+                            : Icons.visibility,
                         color: Colors.black,
                       ),
                       onPressed: () {
                         setState(() {
-                          _obscureText2 = !_obscureText2;
+                          _obscureText1 = !_obscureText1;
                         });
-                      },
-                    ),
+                      }),
+                ),
+                onChanged: (value) => password = value,
+              )),
+          SizedBox(height: 30),
+          DelayedAnimation(
+              delay: 300,
+              child: Container(
+                  margin: EdgeInsets.only(
+                    top: 0,
+                    bottom: 130,
                   ),
-                )
-              )
-            ),
+                  child: TextField(
+                    obscureText: _obscureText2,
+                    decoration: InputDecoration(
+                      labelText: 'Confirmer le mot de passe',
+                      labelStyle: TextStyle(
+                        color: Colors.grey,
+                      ),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscureText2 == false
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: Colors.black,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _obscureText2 = !_obscureText2;
+                          });
+                        },
+                      ),
+                    ),
+                    onChanged: (value) => password_confirm = value,
+                  ))),
         ],
       ),
     );

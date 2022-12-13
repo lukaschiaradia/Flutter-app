@@ -4,6 +4,7 @@ import 'dart:async';
 import 'delayed_animation.dart';
 import 'main.dart';
 import 'age_page.dart';
+import 'api.dart';
 
 class NamePage extends StatelessWidget {
   @override
@@ -118,6 +119,7 @@ class _NameFormState extends State<NameForm> {
                   decoration: InputDecoration(
                     labelText: 'Nom',
                   ),
+                  onChanged: (value) => LastName = value,
                 ),
               ),
             ),
@@ -132,6 +134,7 @@ class _NameFormState extends State<NameForm> {
                   decoration: InputDecoration(
                     labelText: 'Prénom',
                   ),
+                  onChanged: (value) => firstName = value,
                 ),
               ),
             ),

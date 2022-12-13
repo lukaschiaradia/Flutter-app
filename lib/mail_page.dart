@@ -5,6 +5,7 @@ import 'delayed_animation.dart';
 import 'main.dart';
 import 'name_page.dart';
 import 'password_page.dart';
+import 'api.dart';
 
 class MailPage extends StatelessWidget {
   @override
@@ -119,6 +120,7 @@ class _EmailFormState extends State<EmailForm> {
                   decoration: InputDecoration(
                     labelText: 'Email',
                   ),
+                  onChanged: (value) => email = value,
                 ),
               ),
             ),
