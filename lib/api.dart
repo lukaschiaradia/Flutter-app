@@ -42,18 +42,16 @@ Future<num> api_register(
   var endPoint = Uri.http('127.0.0.1:8000', '/accounts/register/');
   num int_age = int.parse(age);
   Map data = {};
-  print(mail);
   data['email'] = email;
   data['password'] = password;
   data['age'] = int_age;
   data['firstName'] = firstName;
   data['LastName'] = LastName;
   data['phone'] = phone;
-  if (password == password_confirm) {
+  if (password == password_confirm)
     data['password_confirm'] = password_confirm;
-  } else {
+  else
     print("passwords don't match");
-  }
   try {
     var response = await Client().post(endPoint,
         headers: <String, String>{
