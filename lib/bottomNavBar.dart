@@ -66,7 +66,7 @@ class _ButtonNavBarState extends State<ButtonNavBar> {
           } else if (index == 1) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => PlanningPage()),
+              MaterialPageRoute(builder: (context) => Planning()),
             );
           } else if (index == 2) {
             Navigator.push(

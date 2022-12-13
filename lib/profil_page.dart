@@ -56,7 +56,6 @@ class Profil extends StatelessWidget {
                       padding: const EdgeInsets.all(15),
                       width: double.infinity,
                       child: Column(
-                        
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const SizedBox(height: 100),
