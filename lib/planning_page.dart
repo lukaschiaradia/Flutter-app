@@ -30,29 +30,27 @@ class Planning extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        iconTheme: IconThemeData(color: Color(0Xff6949FF)),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Padding(
+          padding: const EdgeInsets.only(left: 10.0, top: 5.0),
+          child: Text('Mes rendez-vous',
+              style: TextStyle(
+                  fontSize: 30,
+                  color: Color(0Xff6949FF),
+                  decoration: TextDecoration.underline,
+                  fontWeight: FontWeight.bold)),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(10),
           color: Colors.white,
           child: Column(
             children: [
-              Container(
-                color: Colors.white,
-                height: 50,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Mes rendez-vous',
-                      style: TextStyle(
-                        fontSize: 30,
-                        color: blue_color,
-                        decoration: TextDecoration.underline,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               Column(
                 children: rdvList.map((rdv) {
                   return rdvCard(rdv);
@@ -73,7 +71,7 @@ class rdvCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: EdgeInsets.all(15),
       height: 230,
       width: double.infinity,
       decoration: BoxDecoration(
