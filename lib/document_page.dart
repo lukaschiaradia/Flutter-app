@@ -67,7 +67,7 @@ class _DocumentPageState extends State<DocumentPage> {
             if (index == 3) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ProfilPage()),
+                MaterialPageRoute(builder: (context) => ProfilPageState()),
               );
             } else {
               Navigator.push(
