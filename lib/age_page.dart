@@ -5,6 +5,7 @@ import 'delayed_animation.dart';
 import 'main.dart';
 import 'name_page.dart';
 import 'mail_page.dart';
+import 'api.dart';
 
 class AgePage extends StatelessWidget {
   @override
@@ -119,6 +120,7 @@ class _AgeFormState extends State<AgeForm> {
                   decoration: InputDecoration(
                     labelText: 'Âge',
                   ),
+                  onChanged: (value) => age = value,
                 ),
               ),
             ),
