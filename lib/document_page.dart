@@ -17,7 +17,6 @@ class DocumentPage extends StatefulWidget {
 }
 
 class _DocumentPageState extends State<DocumentPage> {
-
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -45,23 +44,21 @@ class _DocumentState extends State<Document> {
       child: Column(
         children: [
           DelayedAnimation(
-                delay: 200,
-                child: Container(
-                  height: 100,
-                  margin: EdgeInsets.only(
-                    top: 100,
-                    bottom: 0,
-                  ),
-                  child: Text(
-                    "Mes Documents",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      fontSize: 30,
-                      color: blue_color,
-                    )
-                  ),
-                ),
+            delay: 200,
+            child: Container(
+              height: 100,
+              margin: EdgeInsets.only(
+                top: 100,
+                bottom: 0,
+              ),
+              child: Text("Mes Documents",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    fontSize: 30,
+                    color: blue_color,
+                  )),
+            ),
           ),
           MyStatefulWidget(),
         ],
@@ -95,28 +92,27 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         itemBuilder: (BuildContext context, int index) {
           return Center(
             child: Column(
-            children: [
-              SizedBox(
-                height: 60,
-              ),
-            DelayedAnimation(
-                delay: 300,
-                child: InkWell(
-                  onTap: () {
-                    OpenFile.open("images/zebi.pdf");
-                  }, // Image tapped
-                  splashColor: blue_color, // Splash color over image
-                  child: Ink.image(
-                    width: 100,
-                    height: 100,
-                    image: AssetImage(
-                      "images/pdf.png",
-                    ),
-                  ),
-                )
-              ),
-            ],
-             ),
+              children: [
+                SizedBox(
+                  height: 60,
+                ),
+                DelayedAnimation(
+                    delay: 300,
+                    child: InkWell(
+                      onTap: () {
+                        OpenFile.open("images/zebi.pdf");
+                      }, // Image tapped
+                      splashColor: blue_color, // Splash color over image
+                      child: Ink.image(
+                        width: 100,
+                        height: 100,
+                        image: AssetImage(
+                          "images/pdf.png",
+                        ),
+                      ),
+                    )),
+              ],
+            ),
           );
         },
       ),
