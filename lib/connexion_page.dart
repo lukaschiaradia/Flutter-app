@@ -5,6 +5,7 @@ import 'dart:async';
 import 'delayed_animation.dart';
 import 'main.dart';
 import 'document_page.dart';
+import 'api.dart';
 
 var mail = '';
 var password = '';
@@ -13,24 +14,24 @@ class ConnexionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white.withOpacity(0),
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-            size: 30,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.white.withOpacity(0),
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+              size: 30,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            DelayedAnimation(
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              DelayedAnimation(
                 delay: 200,
                 child: Container(
                   height: 100,
@@ -38,47 +39,55 @@ class ConnexionPage extends StatelessWidget {
                     top: 40,
                     bottom: 0,
                   ),
-                  child: Text(
-                    "Connectez-vous",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.poppins(
-                      color: Colors.black,
-                      fontSize:25,
-                    )
-                  ),
+                  child: Text("Connectez-vous",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.poppins(
+                        color: Colors.black,
+                        fontSize: 25,
+                      )),
                 ),
-            ),
-            SizedBox(height: 35),
-            ConnexionForm(),
-            SizedBox(height: 35),
-            DelayedAnimation(
-                delay: 500,
-                child: Container(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: blue_color,
-                      padding: EdgeInsets.symmetric(
-                        vertical: 20,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                    ),
-                    child: Text("Connexion", textScaleFactor: 1.5,),
-                    onPressed: () {
-                      mail == "Notario@gmail.com" && password == "Notario" ? Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => DocumentPage()),
-                      ) : print("Erreur");
-                    },
-                  ),
-                )
               ),
-          ],
-        ),
-      )
-    );
+              SizedBox(height: 35),
+              ConnexionForm(),
+              SizedBox(height: 35),
+              DelayedAnimation(
+                  delay: 500,
+                  child: Container(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: blue_color,
+                        padding: EdgeInsets.symmetric(
+                          vertical: 20,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                      ),
+                      child: Text(
+                        "Connexion",
+                        textScaleFactor: 1.5,
+                      ),
+                      onPressed: () {
+                        var ret = Future(() =>
+                            api_login(email: mail, password: password));
+                        ret.then((value) {
+                          if (value == 200) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DocumentPage()),
+                            );
+                          } else {
+                            print("Erreur");
+                          }
+                        });
+                      },
+                    ),
+                  )),
+            ],
+          ),
+        ));
   }
 }
 
@@ -100,7 +109,7 @@ class _ConnexionFormState extends State<ConnexionForm> {
       child: Column(
         children: [
           SizedBox(height: 30),
-            DelayedAnimation(
+          DelayedAnimation(
               delay: 300,
               child: TextField(
                 decoration: InputDecoration(
@@ -110,39 +119,38 @@ class _ConnexionFormState extends State<ConnexionForm> {
                   ),
                 ),
                 onChanged: (value) => mail = value,
-              )
-            ),
-            SizedBox(height: 30),
-            DelayedAnimation(
+              )),
+          SizedBox(height: 30),
+          DelayedAnimation(
               delay: 300,
               child: Container(
-                margin: EdgeInsets.only(
-                  top: 0,
-                  bottom: 130,
-                ),
-                child: TextField(
-                  obscureText: _obscureText2,
-                  decoration: InputDecoration(
-                    labelText: 'Mot de passe',
-                    labelStyle: TextStyle(
-                      color: Colors.grey,
-                    ),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscureText2 == false ? Icons.visibility_off : Icons.visibility,
-                        color: Colors.black,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _obscureText2 = !_obscureText2;
-                        });
-                      },
-                    ),
+                  margin: EdgeInsets.only(
+                    top: 0,
+                    bottom: 130,
                   ),
-                  onChanged: (value) => password = value,
-                )
-              )
-            ),
+                  child: TextField(
+                    obscureText: _obscureText2,
+                    decoration: InputDecoration(
+                      labelText: 'Mot de passe',
+                      labelStyle: TextStyle(
+                        color: Colors.grey,
+                      ),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscureText2 == false
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: Colors.black,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _obscureText2 = !_obscureText2;
+                          });
+                        },
+                      ),
+                    ),
+                    onChanged: (value) => password = value,
+                  ))),
         ],
       ),
     );

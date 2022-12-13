@@ -55,10 +55,10 @@ class WelcomePage extends StatelessWidget {
                           textScaleFactor: 1.5,
                         ),
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => NamePage()),
-                          );
+                          //Navigator.push(
+                          //  context,
+                          //  MaterialPageRoute(builder: (context) => NamePage()),
+                          //);
                         },
                       ),
                     )),
