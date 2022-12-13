@@ -7,6 +7,7 @@ import 'main.dart';
 import 'package:open_file/open_file.dart';
 import 'package:file_picker/file_picker.dart';
 import 'profil_page.dart';
+import 'bottomNavBar.dart';
 
 class DocumentPage extends StatefulWidget {
   const DocumentPage();
@@ -22,62 +23,7 @@ class _DocumentPageState extends State<DocumentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: MyStatefulWidget(),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _currentIndex,
-        unselectedItemColor: Colors.grey,
-        selectedItemColor: blue_color,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: ImageIcon(
-                size: 40,
-                AssetImage("images/folder-white.png"),
-                color: Color.fromARGB(255, 0, 0, 0),
-            ),
-            label: 'Documents',
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(
-                size: 40,
-                AssetImage("images/planning-white.png"),
-                color: Color.fromARGB(255, 0, 0, 0),
-            ),
-            label: 'Agenda',
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(
-                size: 40,
-                AssetImage("images/tchat.png"),
-                color: Color.fromARGB(255, 0, 0, 0),
-            ),
-            label: 'FAQ',
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(
-                size: 40,
-                AssetImage("images/profil-white.png"),
-                color: Color.fromARGB(255, 0, 0, 0),
-            ),
-            label: 'Profil',
-          ),
-        ],
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-            if (index == 3) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ProfilPageState()),
-              );
-            } else {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => DocumentPage()),
-              );
-            }
-          });
-        },
-      ),
+      bottomNavigationBar: ButtonNavBar(),
     );
   }
 }
