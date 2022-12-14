@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'profil_page.dart';
 import 'document_page.dart';
 import 'planning_page.dart';
+import 'api.dart';
 
 class ButtonNavBar extends StatefulWidget {
   const ButtonNavBar();
@@ -64,10 +65,14 @@ class _ButtonNavBarState extends State<ButtonNavBar> {
               MaterialPageRoute(builder: (context) => DocumentPage()),
             );
           } else if (index == 1) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Planning()),
-            );
+            rdv_list = Future(() => api_get_planning(token: token));
+            rdv_list.then((value) {
+              rdv_list = value;
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Planning()),
+              );
+            });
           } else if (index == 2) {
             Navigator.push(
               context,

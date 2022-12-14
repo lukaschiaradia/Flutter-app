@@ -8,25 +8,28 @@ import 'package:open_file/open_file.dart';
 import 'package:file_picker/file_picker.dart';
 import 'profil_page.dart';
 import 'bottomNavBar.dart';
+import 'api.dart';
+
+List<dynamic> create_planning_list(List rdvList) {
+  List<dynamic> planningList = [];
+  print("In function create_planning_list and lenght");
+  print(rdvList.length);
+  for (int x = 0; x < 2; x++) {
+    planningList = [
+      ...planningList,
+      {
+        'title': rdvList[x]['name'],
+        'date': rdvList[x]['begin'],
+        'description': rdvList[x]['description'],
+      }
+    ];
+  }
+  print("Before return");
+  return planningList;
+}
 
 class Planning extends StatelessWidget {
-  final List rdvList = [
-    {
-      'title': 'Signature Acte de Vente',
-      'date': '22/11/2022',
-      'time': '10:30',
-    },
-    {
-      'title': 'Remplir contrat de mariage',
-      'date': '05/01/2023',
-      'time': '14:00',
-    },
-    {
-      'title': 'Signature du testament',
-      'date': '19/01/2023',
-      'time': '08:45',
-    },
-  ];
+  final List rdvList = create_planning_list(rdv_list);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,7 +99,7 @@ class rdvCard extends StatelessWidget {
                   topLeft: Radius.circular(18), topRight: Radius.circular(18)),
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ImageIcon(
                   size: 30,
@@ -109,22 +112,11 @@ class rdvCard extends StatelessWidget {
                       fontSize: 20,
                       color: Colors.white,
                     )),
-                ImageIcon(
-                  size: 30,
-                  AssetImage("images/time.png"),
-                  color: Colors.white,
-                ),
-                Text(rdvData['time'],
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                    )),
               ],
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(10, 60, 10, 0),
+            margin: EdgeInsets.fromLTRB(10, 25, 10, 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -133,10 +125,25 @@ class rdvCard extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.white,
+                      fontWeight: FontWeight.bold,
                     )),
               ],
             ),
           ),
+          Container(
+            margin: EdgeInsets.fromLTRB(10, 40, 10, 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(rdvData['description'],
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.white,
+                    )),
+              ],
+            ),
+          )
         ],
       ),
     );
