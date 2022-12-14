@@ -12,6 +12,7 @@ var password_confirm = '';
 var age = '';
 var token = '';
 dynamic rdv_list = [];
+dynamic faq_list = [];
 
 Future<num> api_login({required String email, required String password}) async {
   var endPoint = Uri.http('127.0.0.1:8000', '/accounts/login/');
@@ -75,20 +76,48 @@ Future<num> api_register(
 Future<dynamic> api_get_planning({required String token}) async {
   var endPoint = Uri.http('127.0.0.1:8000', '/planning/');
   try {
-    print("Before get");
     var response = await Client().get(endPoint, headers: <String, String>{
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token,
     });
-    print("After get");
     var json_map = json.decode(response.body);
-    print("After decode");
     print(response.statusCode);
-    //print(json_map);
-    print("After json_map");
     rdv_list = json_map;
+    print("json_map");
+    print(json_map);
     return await json_map;
   } catch (e) {
     throw (e.toString());
   }
+}
+
+Future<dynamic> api_get_questions() async {
+  var endPoint = Uri.http('127.0.0.1:8000', '/faq/');
+  try {
+    var response = await Client().get(endPoint, headers: <String, String>{
+      'Content-Type': 'application/json',
+    });
+    var json_map = json.decode(response.body);
+    print(response.statusCode);
+    rdv_list = json_map;
+    print("json_map of faq");
+    print(json_map);
+    return await json_map;
+  } catch (e) {
+    throw (e.toString());
+  }
+}
+
+List<dynamic> create_faq_list(List faqList) {
+  List<dynamic> faq_List = [];
+  for (int x = 0; x < faqList.length; x++) {
+    faq_List = [
+      ...faq_List,
+      {
+        'title': faqList[x]['title'],
+        'description': faqList[x]['description'],
+      }
+    ];
+  }
+  return faq_List;
 }

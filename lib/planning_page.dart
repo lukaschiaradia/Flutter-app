@@ -12,9 +12,7 @@ import 'api.dart';
 
 List<dynamic> create_planning_list(List rdvList) {
   List<dynamic> planningList = [];
-  print("In function create_planning_list and lenght");
-  print(rdvList.length);
-  for (int x = 0; x < 2; x++) {
+  for (int x = 0; x < rdvList.length; x++) {
     planningList = [
       ...planningList,
       {
@@ -24,7 +22,6 @@ List<dynamic> create_planning_list(List rdvList) {
       }
     ];
   }
-  print("Before return");
   return planningList;
 }
 
