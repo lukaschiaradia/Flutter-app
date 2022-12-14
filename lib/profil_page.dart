@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'welcome_page.dart';
-
-import 'package:flutter/material.dart';
 import 'bottomNavBar.dart';
-import 'package:Notario/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'document_page.dart';
 
 class Profil extends StatelessWidget {
   const Profil({super.key});
@@ -13,7 +12,16 @@ class Profil extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: Drawer(),
+      endDrawer: Drawer(child: 
+      ListView(children: [
+        DrawerHeader(child: null,),
+        ListTile(title: Text('text'), contentPadding: const EdgeInsets.only(left:50.0),
+        onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => DocumentPage()));},),
+        ListTile(title: Text('text'),),
+        ListTile(title: Text('text'),),
+      ],
+      ),
+      ),
       backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -37,7 +45,7 @@ class Profil extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 50,
-                  backgroundImage: AssetImage('images/profil-white.jpeg'),
+                  backgroundImage: AssetImage('images/shrek.jpeg'),
                 ),
                 Text('Andrew Ainsley',
                     style: TextStyle(
