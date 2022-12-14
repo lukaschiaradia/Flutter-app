@@ -37,7 +37,7 @@ class Profil extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 50,
-                  backgroundImage: AssetImage('images/shrek.jpeg'),
+                  backgroundImage: AssetImage('images/profil-white.jpeg'),
                 ),
                 Text('Andrew Ainsley',
                     style: TextStyle(
