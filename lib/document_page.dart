@@ -9,74 +9,63 @@ import 'package:file_picker/file_picker.dart';
 import 'profil_page.dart';
 import 'bottomNavBar.dart';
 
-class DocumentPage extends StatefulWidget {
-  const DocumentPage();
-
-  @override
-  _DocumentPageState createState() => _DocumentPageState();
-}
-
-class _DocumentPageState extends State<DocumentPage> {
-  int _currentIndex = 0;
+class DocumentPage extends StatelessWidget {
+  final List pdfList = [
+    {
+      'title': 'Example',
+    },
+    {
+      'title': 'Example',
+    },
+    {
+      'title': 'Example',
+    },
+    {
+      'title': 'Example',
+    },
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: MyStatefulWidget(),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        iconTheme: IconThemeData(color: Color(0Xff6949FF)),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Padding(
+          padding: const EdgeInsets.only(left: 10.0, top: 5.0),
+          child: Text('Mes documents',
+              style: TextStyle(
+                  fontSize: 30,
+                  color: Color(0Xff6949FF),
+                  decoration: TextDecoration.underline,
+                  fontWeight: FontWeight.bold)),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(10),
+          color: Colors.white,
+          child: Column(
+            children: [
+              Column(
+                children: pdfList.map((pdf) {
+                  return pdfCard(pdf);
+                }).toList(),
+              ),
+            ],
+          ),
+        ),
+      ),
       bottomNavigationBar: ButtonNavBar(),
     );
   }
 }
 
-class Document extends StatefulWidget {
-  const Document();
-
-  @override
-  _DocumentState createState() => _DocumentState();
-}
-
-class _DocumentState extends State<Document> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: 30,
-      ),
-      child: Column(
-        children: [
-          DelayedAnimation(
-            delay: 200,
-            child: Container(
-              height: 100,
-              margin: EdgeInsets.only(
-                top: 100,
-                bottom: 0,
-              ),
-              child: Text("Mes Documents",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    decoration: TextDecoration.underline,
-                    fontSize: 30,
-                    color: blue_color,
-                  )),
-            ),
-          ),
-          MyStatefulWidget(),
-        ],
-      ),
-    );
-  }
-}
-
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({super.key});
-
-  @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
-}
-
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+class pdfCard extends StatelessWidget {
+  final Map pdfData;
   final ScrollController _controllerOne = ScrollController();
-
+  pdfCard(this.pdfData);
   @override
   Widget build(BuildContext context) {
     return Scrollbar(
@@ -84,42 +73,53 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       thumbVisibility: true,
       child: GridView.builder(
         controller: _controllerOne,
-        itemCount: 3,
+        itemCount: 2,
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         gridDelegate:
             const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemBuilder: (BuildContext context, int index) {
           return Center(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 60,
+            child: Container(
+                margin: EdgeInsets.fromLTRB(10, 30, 10, 30),
+                height: 150,
+                width: 150,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
                 ),
-                DelayedAnimation(
-                    delay: 300,
+                child: Center(
+                  child: Container(
+                    height: 60,
+                    margin: EdgeInsets.fromLTRB(20, 10, 20, 30),
                     child: InkWell(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          ImageIcon(
+                            size: 40,
+                            AssetImage("images/pdf.png"),
+                            color: Colors.black,
+                          ),
+                        ],
+                      ),
                       onTap: () {
                         OpenFile.open("images/zebi.pdf");
-                      }, // Image tapped
-                      splashColor: blue_color, // Splash color over image
-                      child: Ink.image(
-                        width: 100,
-                        height: 100,
-                        image: AssetImage(
-                          "images/pdf.png",
-                        ),
-                      ),
-                    )),
-              ],
-            ),
+                      },
+                    ),
+                  ),
+                )),
           );
         },
       ),
     );
   }
-}
-
-void openFile(PlatformFile file) {
-  OpenFile.open(file.path);
 }
