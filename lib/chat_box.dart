@@ -52,36 +52,51 @@ class _ChatBoxState extends State<ChatBox> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: Color(0Xff6949FF)),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Padding(
+          padding: const EdgeInsets.only(left: 10.0, top: 5.0),
+          child: Text('Discussion',
+              style: TextStyle(
+                  fontSize: 30,
+                  color: Color(0Xff6949FF),
+                  decoration: TextDecoration.underline,
+                  fontWeight: FontWeight.bold)),
+        ),
+      ),
       body: Column(
         children: [
           Expanded(
             child: ListView.builder(
-              
-              itemBuilder: (context, index) => Text('Vous:\n    ' + _messages[index]),
+              itemBuilder: (context, index) =>
+                  Text('Vous:\n    ' + _messages[index]),
               itemCount: _messages.length,
             ),
           ),
           Padding(
             padding: EdgeInsets.all(16.0),
             child: TextField(
-               decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(45)),
-                      borderSide: BorderSide.none),
-                  labelText: "Chat",
-                  hintText: "Envoyez un message",
-                  suffixIcon: Icon(Icons.send),
-                ),
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(45)),
+                    borderSide: BorderSide.none),
+                labelText: "Chat",
+                hintText: "Envoyez un message",
+                suffixIcon: Icon(Icons.send),
+              ),
               controller: _textController,
-               onSubmitted: (text) {
-              setState(() {
-                _messages.add(text);
-                _textController.clear();
+              onSubmitted: (text) {
+                setState(
+                  () {
+                    _messages.add(text);
+                    _textController.clear();
+                  },
+                );
               },
-              );
-            },
             ),
           ),
         ],
@@ -89,9 +104,9 @@ class _ChatBoxState extends State<ChatBox> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
-          final String text = _textController.text;
-          _messages.add(text);
-          _textController.clear();
+            final String text = _textController.text;
+            _messages.add(text);
+            _textController.clear();
           });
         },
         child: Icon(Icons.send),

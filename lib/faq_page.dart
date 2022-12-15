@@ -9,6 +9,7 @@ import 'package:file_picker/file_picker.dart';
 import 'profil_page.dart';
 import 'bottomNavBar.dart';
 import 'api.dart';
+import 'chat_box.dart';
 
 List<dynamic> create_faq_list(List faqlist) {
   List<dynamic> faq_List = [];
@@ -21,13 +22,33 @@ List<dynamic> create_faq_list(List faqlist) {
       }
     ];
   }
+
   return faq_List;
+}
+
+List<dynamic> create_faq_display(List faqlist) {
+  List<dynamic> faq_List = [];
+  List<dynamic> faq_display = [];
+  for (int x = 0; x < faqlist.length; x++) {
+    faq_List = [
+      ...faq_List,
+      {
+        'title': faqlist[x]['title'],
+        'description': faqlist[x]['description'],
+      }
+    ];
+  }
+
+  faq_display = faq_List.map((subList) => subList['title']).toList();
+  return faq_display;
 }
 
 class FaqPage extends StatelessWidget {
   final List faqList = create_faq_list(faq_list);
+  final List faq_display = create_faq_display(faq_list);
+
   @override
-  Widget build(BuildContext contex) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -111,6 +132,22 @@ class FaqPage extends StatelessWidget {
                         return faqCard(faq);
                       }).toList(),
                     ),
+                  ],
+                ),
+              ),
+              Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    ElevatedButton(
+                      child: Icon(Icons.chat),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ChatBox()),
+                        );
+                      },
+                    )
                   ],
                 ),
               ),
