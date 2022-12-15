@@ -71,7 +71,14 @@ class _ChatBoxState extends State<ChatBox> {
           Expanded(
             child: ListView.builder(
               itemBuilder: (context, index) =>
-                  Text('Vous:\n    ' + _messages[index]),
+                  Text(
+                    'Vous:\n    ' + _messages[index],
+                    selectionColor: Colors.black,
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                    ),
+                  ),
               itemCount: _messages.length,
             ),
           ),

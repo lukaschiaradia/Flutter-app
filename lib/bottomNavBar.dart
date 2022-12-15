@@ -6,6 +6,8 @@ import 'planning_page.dart';
 import 'faq_page.dart';
 import 'api.dart';
 
+int _currentIndex = 0;
+
 class ButtonNavBar extends StatefulWidget {
   const ButtonNavBar();
 
@@ -14,7 +16,6 @@ class ButtonNavBar extends StatefulWidget {
 }
 
 class _ButtonNavBarState extends State<ButtonNavBar> {
-  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
