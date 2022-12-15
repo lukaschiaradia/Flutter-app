@@ -9,6 +9,7 @@ import 'package:file_picker/file_picker.dart';
 import 'profil_page.dart';
 import 'bottomNavBar.dart';
 import 'api.dart';
+import 'package:intl/intl.dart';
 
 List<dynamic> create_planning_list(List rdvList) {
   List<dynamic> planningList = [];
@@ -17,7 +18,9 @@ List<dynamic> create_planning_list(List rdvList) {
       ...planningList,
       {
         'title': rdvList[x]['name'],
-        'date': rdvList[x]['begin'],
+        'date': DateFormat('dd/MM/yyyy')
+            .format(DateTime.parse(rdvList[x]['begin'])),
+        'time': DateFormat('HH:mm').format(DateTime.parse(rdvList[x]['begin'])),
         'description': rdvList[x]['description'],
       }
     ];
@@ -96,7 +99,7 @@ class rdvCard extends StatelessWidget {
                   topLeft: Radius.circular(18), topRight: Radius.circular(18)),
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ImageIcon(
                   size: 30,
@@ -105,6 +108,17 @@ class rdvCard extends StatelessWidget {
                 ),
                 Text(rdvData['date'],
                     textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                    )),
+                ImageIcon(
+                  size: 30,
+                  AssetImage("images/time.png"),
+                  color: Colors.white,
+                ),
+                Text(rdvData['time'],
+                    textAlign: TextAlign.right,
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.white,

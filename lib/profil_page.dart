@@ -61,6 +61,7 @@ class Profil extends StatelessWidget {
           child: Text('Mon Profil',
               style: TextStyle(
                   color: Color(0Xff6949FF),
+                  fontSize: 30,
                   decoration: TextDecoration.underline,
                   fontWeight: FontWeight.bold)),
         ),
@@ -95,7 +96,7 @@ class Profil extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedBox(height: 100),
+                            const SizedBox(height: 50),
                             Text('Email'),
                             Text(profil_email,
                                 style: TextStyle(fontWeight: FontWeight.bold)),
