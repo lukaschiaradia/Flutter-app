@@ -73,7 +73,7 @@ class pdfCard extends StatelessWidget {
       thumbVisibility: true,
       child: GridView.builder(
         controller: _controllerOne,
-        itemCount: 2,
+        itemCount: 1,
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         gridDelegate:
@@ -84,8 +84,9 @@ class pdfCard extends StatelessWidget {
                 margin: EdgeInsets.fromLTRB(10, 30, 10, 30),
                 height: 150,
                 width: 150,
+                alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Color.fromARGB(255, 255, 255, 255),
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
@@ -101,13 +102,18 @@ class pdfCard extends StatelessWidget {
                     height: 60,
                     margin: EdgeInsets.fromLTRB(20, 10, 20, 30),
                     child: InkWell(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      child: Wrap(
+                        //mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           ImageIcon(
-                            size: 40,
+                            size: 80,
                             AssetImage("images/pdf.png"),
                             color: Colors.black,
+                          ),
+                          Text(
+                            "pdfData['title']",
+                            style: GoogleFonts.roboto(
+                                fontSize: 10, color: Colors.black),
                           ),
                         ],
                       ),
