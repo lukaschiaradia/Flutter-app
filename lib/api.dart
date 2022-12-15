@@ -13,6 +13,11 @@ var age = '';
 var token = '';
 dynamic rdv_list = [];
 dynamic faq_list = [];
+dynamic chats_list = [];
+dynamic chat_List = [];
+dynamic chat_id = [];
+dynamic chat_with_messages = [];
+dynamic all_messages = [];
 
 Future<num> api_login({required String email, required String password}) async {
   var endPoint = Uri.http('127.0.0.1:8000', '/accounts/login/');
@@ -120,4 +125,69 @@ List<dynamic> create_faq_list(List faqList) {
     ];
   }
   return faq_List;
+}
+
+Future<dynamic> api_get_chats() async {
+  var endPoint = Uri.http('127.0.0.1:8000', '/chat/');
+  try {
+    var response = await Client().get(endPoint, headers: <String, String>{
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+    });
+    var json_map = json.decode(response.body);
+    print(response.statusCode);
+    chats_list = json_map;
+    print("json_map of chats");
+    print(json_map);
+    return await json_map;
+  } catch (e) {
+    throw (e.toString());
+  }
+}
+
+List<dynamic> create_chat_list(List chats_list) {
+  List<dynamic> chat_List = [];
+  for (int x = 0; x < chats_list.length; x++) {
+    chat_List = [
+      ...chat_List,
+      {
+        'chat_id': chats_list[x]['id'],
+        'receiver': chats_list[x]['user_name'],
+        'id_receiver': chats_list[x]['user_id'],
+      }
+    ];
+  }
+  return chat_List;
+}
+
+Future<dynamic> api_get_chat(chatId) async {
+  print(chatId);
+  var endPoint = Uri.http('127.0.0.1:8000', '/chat/$chatId');
+  try {
+    var response = await Client().get(endPoint, headers: <String, String>{
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+    });
+    var json_map = json.decode(response.body);
+    print(response.statusCode);
+    chat_with_messages = json_map;
+    return await json_map;
+  } catch (e) {
+    throw (e.toString());
+  }
+}
+
+List<dynamic> create_messages_list(List chat_with_messages) {
+  List<dynamic> messages = [];
+  for (int x = 0; x < chat_with_messages.length; x++) {
+    messages = [
+      ...messages,
+      {
+        'sender': chat_with_messages[x]['sender'],
+        'receiver': chat_with_messages[x]['receiver'],
+        'message': chat_with_messages[x]['text'],
+      }
+    ];
+  }
+  return messages;
 }
