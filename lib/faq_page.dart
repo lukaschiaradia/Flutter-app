@@ -117,9 +117,44 @@ class FaqPage extends StatelessWidget {
                       ),
                       children: [
                         Column(
-                          children: faqList.map((faq) {
-                            return faqCard(faq);
-                          }).toList(),
+                          children: [
+                            ExpansionTile(
+                              backgroundColor: Colors.black12,
+                              tilePadding: EdgeInsets.fromLTRB(30, 10, 0, 0),
+                              title: Text(
+                                "- Qu'est-ce que l'usufruit ?",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                              children: [
+                                Container(
+                                  color: Colors.black26,
+                                  padding: EdgeInsets.all(20),
+                                  width: double.infinity,
+                                  child: Text(
+                                    "L'usufruit est le droit d'occuper un bien sans en être propriétaire.",
+                                  ),
+                                ),
+                              ],
+                            ),
+                            ExpansionTile(
+                              backgroundColor: Colors.black12,
+                              tilePadding: EdgeInsets.fromLTRB(30, 10, 0, 0),
+                              title: Text(
+                                "- Qu'est-ce que la nue-propriété ?",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                              children: [
+                                Container(
+                                  color: Colors.black26,
+                                  padding: EdgeInsets.all(20),
+                                  width: double.infinity,
+                                  child: Text(
+                                    "La nue-propriété est un droit qui permet de disposer d'une chose mobilière ou immobilière.",
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -131,9 +166,44 @@ class FaqPage extends StatelessWidget {
                       ),
                       children: [
                         Column(
-                          children: faqList.map((faq) {
-                            return faqCard(faq);
-                          }).toList(),
+                          children: [
+                            ExpansionTile(
+                              backgroundColor: Colors.black12,
+                              tilePadding: EdgeInsets.fromLTRB(30, 10, 0, 0),
+                              title: Text(
+                                "- Comment se déroule la signature du compromis de vente ?",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                              children: [
+                                Container(
+                                  color: Colors.black26,
+                                  padding: EdgeInsets.all(20),
+                                  width: double.infinity,
+                                  child: Text(
+                                    "Le compromis de vente est le premier document qui atteste juridiquement de l'accord de transaction immobilière entre l'acheteur et le vendeur d'un bien immobilier.",
+                                  ),
+                                ),
+                              ],
+                            ),
+                            ExpansionTile(
+                              backgroundColor: Colors.black12,
+                              tilePadding: EdgeInsets.fromLTRB(30, 10, 0, 0),
+                              title: Text(
+                                "- Combien coûte un compromis de vente ?",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                              children: [
+                                Container(
+                                  color: Colors.black26,
+                                  padding: EdgeInsets.all(20),
+                                  width: double.infinity,
+                                  child: Text(
+                                    "Le compromis de vente est rédigé par un cabinet notarial selon les indications qui lui ont été fournies par les parties prenantes à la transaction immobilière.\nCe travail qui permet de s'assurer de la conformité juridique et légale des termes du document est rémunéré.\nSon tarif est d'environ 300 € qui sont payés par l'acheteur en même temps que les frais de notaire.",
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -145,9 +215,44 @@ class FaqPage extends StatelessWidget {
                       ),
                       children: [
                         Column(
-                          children: faqList.map((faq) {
-                            return faqCard(faq);
-                          }).toList(),
+                          children: [
+                            ExpansionTile(
+                              backgroundColor: Colors.black12,
+                              tilePadding: EdgeInsets.fromLTRB(30, 10, 0, 0),
+                              title: Text(
+                                "- Comment créer un compte notario ?",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                              children: [
+                                Container(
+                                  color: Colors.black26,
+                                  padding: EdgeInsets.all(20),
+                                  width: double.infinity,
+                                  child: Text(
+                                    "Cliquez sur l'icone profil et rentrez vos informations personnelles.",
+                                  ),
+                                ),
+                              ],
+                            ),
+                            ExpansionTile(
+                              backgroundColor: Colors.black12,
+                              tilePadding: EdgeInsets.fromLTRB(30, 10, 0, 0),
+                              title: Text(
+                                "- Comment me connecter à mon compte ?",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                              children: [
+                                Container(
+                                  color: Colors.black26,
+                                  padding: EdgeInsets.all(20),
+                                  width: double.infinity,
+                                  child: Text(
+                                    "Cliquez sur l'icone profil, puis sur 'sign-in' et rentrez vos identifiants de connexion.",
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ],
                     ),
