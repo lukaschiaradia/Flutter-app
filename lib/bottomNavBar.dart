@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'profil_page.dart';
 import 'document_page.dart';
 import 'planning_page.dart';
+import 'faq_page.dart';
 import 'api.dart';
 
 class ButtonNavBar extends StatefulWidget {
@@ -76,7 +77,7 @@ class _ButtonNavBarState extends State<ButtonNavBar> {
           } else if (index == 2) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => DocumentPage()),
+              MaterialPageRoute(builder: (context) => FaqPage()),
             );
           } else if (index == 3) {
             Navigator.push(

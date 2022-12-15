@@ -12,15 +12,28 @@ class Profil extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: Drawer(child: 
-      ListView(children: [
-        DrawerHeader(child: null,),
-        ListTile(title: Text('text'), contentPadding: const EdgeInsets.only(left:50.0),
-        onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => DocumentPage()));},),
-        ListTile(title: Text('text'),),
-        ListTile(title: Text('text'),),
-      ],
-      ),
+      endDrawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
+              child: null,
+            ),
+            ListTile(
+              title: Text('text'),
+              contentPadding: const EdgeInsets.only(left: 50.0),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => DocumentPage()));
+              },
+            ),
+            ListTile(
+              title: Text('text'),
+            ),
+            ListTile(
+              title: Text('text'),
+            ),
+          ],
+        ),
       ),
       backgroundColor: Colors.white,
       appBar: AppBar(
