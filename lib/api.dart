@@ -9,8 +9,11 @@ var LastName = '';
 var email = '';
 var password = '';
 var password_confirm = '';
+
+var json_map = '';
 var age = '';
 var token = '';
+var json_info = {};
 dynamic rdv_list = [];
 dynamic faq_list = [];
 dynamic chats_list = [];
@@ -31,8 +34,10 @@ Future<num> api_login({required String email, required String password}) async {
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: convert.json.encode(data));
-    print(response.body);
-    var json_map = json.decode(response.body);
+    var json_response = response.body;
+    var decode = utf8.decode(json_response.runes.toList());
+    var json_map = json.decode(decode);
+    json_info = json_map;
     token = json_map['token'];
     print(response.statusCode);
     return await (response.statusCode);
@@ -69,7 +74,9 @@ Future<num> api_register(
         },
         body: convert.json.encode(data));
     print(response.body);
-    var json_map = json.decode(response.body);
+    var json_response = response.body;
+    var decode = utf8.decode(json_response.runes.toList());
+    var json_map = json.decode(decode);
     token = json_map['token'];
     print(response.statusCode);
     return await (response.statusCode);
@@ -85,7 +92,9 @@ Future<dynamic> api_get_planning({required String token}) async {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token,
     });
-    var json_map = json.decode(response.body);
+    var json_response = response.body;
+    var decode = utf8.decode(json_response.runes.toList());
+    var json_map = json.decode(decode);
     print(response.statusCode);
     rdv_list = json_map;
     print("json_map");
@@ -102,11 +111,10 @@ Future<dynamic> api_get_questions() async {
     var response = await Client().get(endPoint, headers: <String, String>{
       'Content-Type': 'application/json',
     });
-    var json_map = json.decode(response.body);
-    print(response.statusCode);
+    var json_response = response.body;
+    var decode = utf8.decode(json_response.runes.toList());
+    var json_map = json.decode(decode);
     rdv_list = json_map;
-    print("json_map of faq");
-    print(json_map);
     return await json_map;
   } catch (e) {
     throw (e.toString());

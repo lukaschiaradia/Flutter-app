@@ -5,6 +5,21 @@ import 'bottomNavBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'document_page.dart';
+import 'api.dart';
+
+var profil_phone = '';
+var profil_firstName = '';
+var profil_lastName = '';
+int profil_age = 0;
+var profil_email = '';
+
+void get_user_infos() {
+  profil_phone = json_info['user']['phone'];
+  profil_firstName = json_info['user']['first_name'];
+  profil_lastName = json_info['user']['last_name'];
+  profil_age = json_info['user']['age'];
+  profil_email = json_info['user']['email'];
+}
 
 class Profil extends StatelessWidget {
   const Profil({super.key});
@@ -50,58 +65,60 @@ class Profil extends StatelessWidget {
                   fontWeight: FontWeight.bold)),
         ),
       ),
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Flexible(
-            child: Column(
-              children: [
-                CircleAvatar(
-                  radius: 50,
-                  backgroundImage: AssetImage('images/shrek.jpeg'),
-                ),
-                Text('Andrew Ainsley',
-                    style: TextStyle(
+      body: SingleChildScrollView (
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Flexible(
+              child: Column(
+                children: [
+                  CircleAvatar(
+                    radius: 50,
+                    backgroundImage: AssetImage('images/shrek.jpeg'),
+                  ),
+                  Text(profil_lastName + ' ' + profil_firstName,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 10),
+                  Text(profil_age.toString() + ' ans',
+                      style: TextStyle(color: Colors.black, fontSize: 20)),
+                  DefaultTextStyle(
+                      style: TextStyle(
                         color: Colors.black,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold)),
-                const SizedBox(height: 10),
-                Text('30 ans',
-                    style: TextStyle(color: Colors.black, fontSize: 15)),
-                DefaultTextStyle(
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                    ),
-                    child: Container(
-                      padding: const EdgeInsets.all(15),
-                      width: double.infinity,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 100),
-                          Text('Email'),
-                          Text('andrew.ainsley@yourdomain.com',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                          const SizedBox(height: 45),
-                          Text('Téléphone'),
-                          Text('06 XX XX XX XX',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                          const SizedBox(height: 45),
-                          Text('Mon notaire'),
-                          Text('M. PATOCHE',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                          const SizedBox(height: 45),
-                          Text('Notario ID'),
-                          Text('965794584358369',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                        ],
+                        fontSize: 20,
                       ),
-                    ))
-              ],
+                      child: Container(
+                        padding: const EdgeInsets.all(15),
+                        width: double.infinity,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 100),
+                            Text('Email'),
+                            Text(profil_email,
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            const SizedBox(height: 45),
+                            Text('Téléphone'),
+                            Text(profil_phone,
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            const SizedBox(height: 45),
+                            Text('Mon notaire'),
+                            Text('M. PATOCHE',
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            const SizedBox(height: 45),
+                            Text('Notario ID'),
+                            Text('965794584358369',
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                          ],
+                        ),
+                      ))
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       bottomNavigationBar: ButtonNavBar(),
     );

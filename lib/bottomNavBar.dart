@@ -105,6 +105,7 @@ class _ButtonNavBarState extends State<ButtonNavBar> {
             //  });
             //});
           } else if (index == 3) {
+            get_user_infos();
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => Profil()),
