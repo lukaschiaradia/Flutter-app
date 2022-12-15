@@ -75,27 +75,35 @@ class _ButtonNavBarState extends State<ButtonNavBar> {
               );
             });
           } else if (index == 2) {
-            chats_list = Future(() => api_get_chats());
-            chats_list.then((value) {
-              chats_list = value;
-              print("Récupérer les chats == OK");
-              chat_List = create_chat_list(chats_list);
-              print(chat_List);
-              print("Création de la liste des chats == OK");
-              chat_id = Future(() => api_get_chat(chat_List[0]['chat_id']));
-              chat_id.then((value) {
-                chat_with_messages = value;
-                print("Récupérer les messages d'un chat == OK");
-                print(chat_with_messages);
-                all_messages = create_messages_list(chat_with_messages);
-                print("Création de la liste des messages == OK");
-                print(all_messages);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => FaqPage()),
+            faq_list = Future(() => api_get_questions());
+            faq_list.then((value) {
+              faq_list = value;
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => FaqPage()),
               );
-              });
             });
+            //chats_list = Future(() => api_get_chats());
+            //chats_list.then((value) {
+            //  chats_list = value;
+            //  print("Récupérer les chats == OK");
+            //  chat_List = create_chat_list(chats_list);
+            //  print(chat_List);
+            //  print("Création de la liste des chats == OK");
+            //  chat_id = Future(() => api_get_chat(chat_List[0]['chat_id']));
+            //  chat_id.then((value) {
+            //    chat_with_messages = value;
+            //    print("Récupérer les messages d'un chat == OK");
+            //    print(chat_with_messages);
+            //    all_messages = create_messages_list(chat_with_messages);
+            //    print("Création de la liste des messages == OK");
+            //    print(all_messages);
+            //    Navigator.push(
+            //      context,
+            //      MaterialPageRoute(builder: (context) => FaqPage()),
+            //  );
+            //  });
+            //});
           } else if (index == 3) {
             Navigator.push(
               context,

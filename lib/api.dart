@@ -113,20 +113,6 @@ Future<dynamic> api_get_questions() async {
   }
 }
 
-List<dynamic> create_faq_list(List faqList) {
-  List<dynamic> faq_List = [];
-  for (int x = 0; x < faqList.length; x++) {
-    faq_List = [
-      ...faq_List,
-      {
-        'title': faqList[x]['title'],
-        'description': faqList[x]['description'],
-      }
-    ];
-  }
-  return faq_List;
-}
-
 Future<dynamic> api_get_chats() async {
   var endPoint = Uri.http('127.0.0.1:8000', '/chat/');
   try {

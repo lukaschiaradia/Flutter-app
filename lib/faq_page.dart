@@ -10,21 +10,22 @@ import 'profil_page.dart';
 import 'bottomNavBar.dart';
 import 'api.dart';
 
+List<dynamic> create_faq_list(List faqlist) {
+  List<dynamic> faq_List = [];
+  for (int x = 0; x < faqlist.length; x++) {
+    faq_List = [
+      ...faq_List,
+      {
+        'title': faqlist[x]['title'],
+        'description': faqlist[x]['description'],
+      }
+    ];
+  }
+  return faq_List;
+}
+
 class FaqPage extends StatelessWidget {
-  final List faqList = [
-    {
-      'title': 'Comment prendre un rendez-vous ?',
-      'description': 'Lorem ipsum el pinco del crabejo',
-    },
-    {
-      'title': 'Comment prendre un rendez-vous ?',
-      'description': 'Lorem ipsum el pinco del crabejo',
-    },
-    {
-      'title': 'Comment prendre un rendez-vous ?',
-      'description': 'Lorem ipsum el pinco del crabejo',
-    },
-  ];
+  final List faqList = create_faq_list(faq_list);
   @override
   Widget build(BuildContext contex) {
     return Scaffold(
