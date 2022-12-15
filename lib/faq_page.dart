@@ -26,26 +26,8 @@ List<dynamic> create_faq_list(List faqlist) {
   return faq_List;
 }
 
-List<dynamic> create_faq_display(List faqlist) {
-  List<dynamic> faq_List = [];
-  List<dynamic> faq_display = [];
-  for (int x = 0; x < faqlist.length; x++) {
-    faq_List = [
-      ...faq_List,
-      {
-        'title': faqlist[x]['title'],
-        'description': faqlist[x]['description'],
-      }
-    ];
-  }
-
-  faq_display = faq_List.map((subList) => subList['title']).toList();
-  return faq_display;
-}
-
 class FaqPage extends StatelessWidget {
   final List faqList = create_faq_list(faq_list);
-  final List faq_display = create_faq_display(faq_list);
 
   @override
   Widget build(BuildContext context) {
@@ -127,10 +109,47 @@ class FaqPage extends StatelessWidget {
                 color: Colors.white,
                 child: Column(
                   children: [
-                    Column(
-                      children: faqList.map((faq) {
-                        return faqCard(faq);
-                      }).toList(),
+                    ExpansionTile(
+                      tilePadding: EdgeInsets.all(10),
+                      title: Text(
+                        'Succession',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      children: [
+                        Column(
+                          children: faqList.map((faq) {
+                            return faqCard(faq);
+                          }).toList(),
+                        ),
+                      ],
+                    ),
+                    ExpansionTile(
+                      tilePadding: EdgeInsets.all(10),
+                      title: Text(
+                        'Vente',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      children: [
+                        Column(
+                          children: faqList.map((faq) {
+                            return faqCard(faq);
+                          }).toList(),
+                        ),
+                      ],
+                    ),
+                    ExpansionTile(
+                      tilePadding: EdgeInsets.all(10),
+                      title: Text(
+                        'Support Technique',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      children: [
+                        Column(
+                          children: faqList.map((faq) {
+                            return faqCard(faq);
+                          }).toList(),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -168,17 +187,20 @@ class faqCard extends StatelessWidget {
     return Column(
       children: [
         ExpansionTile(
-          tilePadding: EdgeInsets.all(10),
+          backgroundColor: Colors.black12,
+          tilePadding: EdgeInsets.fromLTRB(30, 10, 0, 0),
           title: Text(
             faqData['title'],
             style: TextStyle(color: Colors.black),
           ),
           children: [
             Container(
-              color: Colors.black12,
+              color: Colors.black26,
               padding: EdgeInsets.all(20),
               width: double.infinity,
-              child: Text(faqData['description']),
+              child: Text(
+                faqData['description'],
+              ),
             ),
           ],
         ),
