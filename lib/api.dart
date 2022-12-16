@@ -4,6 +4,9 @@ import 'dart:io';
 import 'package:Notario/connexion_page.dart';
 import 'package:http/http.dart';
 
+var user_id = 0;
+var receiver_id = 0;
+
 var firstName = '';
 var LastName = '';
 var email = '';
@@ -25,7 +28,6 @@ dynamic all_messages = [];
 Future<num> api_login({required String email, required String password}) async {
   var endPoint = Uri.http('127.0.0.1:8000', '/accounts/login/');
   Map data = {};
-  print(mail);
   data['email'] = email;
   data['password'] = password;
   try {
@@ -39,6 +41,7 @@ Future<num> api_login({required String email, required String password}) async {
     var json_map = json.decode(decode);
     json_info = json_map;
     token = json_map['token'];
+    user_id = json_map['user']['id'];
     print(response.statusCode);
     return await (response.statusCode);
   } catch (e) {
@@ -128,7 +131,9 @@ Future<dynamic> api_get_chats() async {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token,
     });
-    var json_map = json.decode(response.body);
+    var json_response = response.body;
+    var decode = utf8.decode(json_response.runes.toList());
+    var json_map = json.decode(decode);
     print(response.statusCode);
     chats_list = json_map;
     print("json_map of chats");
@@ -162,7 +167,9 @@ Future<dynamic> api_get_chat(chatId) async {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token,
     });
-    var json_map = json.decode(response.body);
+    var json_response = response.body;
+    var decode = utf8.decode(json_response.runes.toList());
+    var json_map = json.decode(decode);
     print(response.statusCode);
     chat_with_messages = json_map;
     return await json_map;
@@ -184,4 +191,27 @@ List<dynamic> create_messages_list(List chat_with_messages) {
     ];
   }
   return messages;
+}
+
+Future<num> api_add_message({required int receiver, required String message}) async {
+  var endPoint = Uri.http('127.0.0.1:8000', '/chat/add/');
+  Map data = {};
+  data['receiver'] = receiver;
+  data['text'] = message;
+  try {
+    var response = await Client().post(endPoint,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ' + token,
+        },
+        body: convert.json.encode(data));
+    var json_response = response.body;
+    var decode = utf8.decode(json_response.runes.toList());
+    var json_map = json.decode(decode);
+    print(json_map);
+    print(response.statusCode);
+    return await (response.statusCode);
+  } catch (e) {
+    throw (e.toString());
+  }
 }
