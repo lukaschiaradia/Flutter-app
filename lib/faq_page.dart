@@ -282,11 +282,23 @@ class FaqPage extends StatelessWidget {
                               ElevatedButton(
                                 child: Icon(Icons.chat),
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ChatBox()),
-                                  );
+                                  chats_list = Future(() => api_get_chats());
+                                  chats_list.then((value) {
+                                    chats_list = value;
+                                    chat_List = create_chat_list(chats_list);
+                                    chat_id = Future(() => api_get_chat(chat_List[0]['chat_id']));
+                                    chat_id.then((value) {
+                                      receiver_id = chat_List[0]['id_receiver'];
+                                      chat_with_messages = value;
+                                      all_messages = create_messages_list(chat_with_messages);
+                                      print("Création de la liste des messages == OK");
+                                      print(all_messages);
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => ChatBox()),
+                                      );
+                                    });
+                                  });
                                 },
                               )
                             ],
