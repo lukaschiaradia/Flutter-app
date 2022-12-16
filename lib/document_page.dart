@@ -10,20 +10,6 @@ import 'profil_page.dart';
 import 'bottomNavBar.dart';
 
 class DocumentPage extends StatelessWidget {
-  final List pdfList = [
-    {
-      'title': 'Example',
-    },
-    {
-      'title': 'Example',
-    },
-    {
-      'title': 'Example',
-    },
-    {
-      'title': 'Example',
-    },
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,18 +29,37 @@ class DocumentPage extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.all(10),
-          color: Colors.white,
-          child: Column(
-            children: [
-              Column(
-                children: pdfList.map((pdf) {
-                  return pdfCard(pdf);
-                }).toList(),
+        child: Wrap(
+          children: [
+            Container(
+              margin: EdgeInsets.fromLTRB(60, 0, 55, 0),
+              child: Wrap(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(top: 20),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(45)),
+                            borderSide: BorderSide.none),
+                        hintText: "Ex: Rechercher un document",
+                        suffixIcon: Icon(Icons.search),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            Wrap(
+              spacing: 30,
+              runSpacing: 30,
+              children: [
+                Container(alignment: Alignment.center, child: pdfCard())
+              ],
+            ),
+          ],
         ),
       ),
       bottomNavigationBar: ButtonNavBar(),
@@ -63,69 +68,76 @@ class DocumentPage extends StatelessWidget {
 }
 
 class pdfCard extends StatelessWidget {
-  final Map pdfData;
-  final ScrollController _controllerOne = ScrollController();
-  pdfCard(this.pdfData);
+  final List pdfList = [
+    {'title': 'Acte de vente', 'path': 'images/pdf.png'},
+    {'title': 'Contrat de mariage', 'path': 'images/pdf.png'},
+    {'title': 'Promesse d\'achat', 'path': 'images/pdf.png'},
+    {'title': 'Inventaire de bien', 'path': 'images/pdf.png'},
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return Scrollbar(
-      controller: _controllerOne,
-      thumbVisibility: true,
-      child: GridView.builder(
-        controller: _controllerOne,
-        itemCount: 1,
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        gridDelegate:
-            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemBuilder: (BuildContext context, int index) {
-          return Center(
-            child: Container(
-                margin: EdgeInsets.fromLTRB(10, 30, 10, 30),
-                height: 150,
-                width: 150,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 255, 255, 255),
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: Offset(0, 3), // changes position of shadow
-                    ),
-                  ],
+    List<Widget> containers = [];
+    for (int i = 0; i < pdfList.length; i++) {
+      containers.add(
+        Container(
+          child: Container(
+            margin: EdgeInsets.fromLTRB(0, 30, 0, 30),
+            height: 150,
+            width: 150,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: Offset(0, 3), // changes position of shadow
                 ),
-                child: Center(
-                  child: Container(
-                    height: 60,
-                    margin: EdgeInsets.fromLTRB(20, 10, 20, 30),
-                    child: InkWell(
-                      child: Wrap(
-                        //mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          ImageIcon(
-                            size: 80,
-                            AssetImage("images/pdf.png"),
+              ],
+            ),
+            child: Center(
+              child: Container(
+                height: 60,
+                margin: EdgeInsets.fromLTRB(20, 10, 20, 30),
+                child: InkWell(
+                  child: Wrap(
+                    children: [
+                      Container(
+                        alignment: Alignment.center,
+                        child: ImageIcon(
+                          size: 50,
+                          AssetImage(pdfList[i]['path']),
+                          color: Colors.black,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.all(20),
+                        child: Text(
+                          pdfList[i]['title'],
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.roboto(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
                             color: Colors.black,
                           ),
-                          Text(
-                            "pdfData['title']",
-                            style: GoogleFonts.roboto(
-                                fontSize: 10, color: Colors.black),
-                          ),
-                        ],
+                        ),
                       ),
-                      onTap: () {
-                        OpenFile.open("images/zebi.pdf");
-                      },
-                    ),
+                    ],
                   ),
-                )),
-          );
-        },
-      ),
+                  onTap: () {
+                    OpenFile.open("images/zebi.pdf");
+                  },
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+    return Column(
+      children: containers,
     );
   }
 }
