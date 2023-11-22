@@ -1,0 +1,31 @@
+Document récapitulatif des projets Flutter réalisés dans le cadre de l'approfondissement de la technologie Flutter.
+
+
+Flutter documentation: https://docs.flutter.dev/
+
+PROJET 1: TodoList
++List
++Widget
++StatelessWidget
++Container
++Align
++Functions
++Architecture
++Text
++Colors
++Icon
+
+Lien de la vidéo: https://www.youtube.com/watch?v=K4P5DZ9TRns
+
+PORJET 2: Sport
++Padding
++Widget
++Row
++GestureDetector
++Text
++Box (BoxDecoration, SizedBox, BoxFit)
++Scaffold
++Colors
++Icon
+
+Lien de la vidéo: https://www.youtube.com/watch?v=jtlIpZxmsiQ&list=PLgmBguE-4f2xzeOuxoNc-hrSmIXR1Rdjp&index=14
