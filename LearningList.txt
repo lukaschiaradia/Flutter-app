@@ -3,7 +3,17 @@ Document récapitulatif des projets Flutter réalisés dans le cadre de l'approf
 
 Flutter documentation: https://docs.flutter.dev/
 
-PROJET 1: TodoList
+PROJET 1: Débutant
++Widget
++Class
++List
++Text
++Colors
++Icon
+
+Lien de la vidéo: https://www.youtube.com/watch?v=D4nhaszNW4o&t=18s
+
+PROJET 2: TodoList
 +List
 +Widget
 +StatelessWidget
@@ -17,10 +27,11 @@ PROJET 1: TodoList
 
 Lien de la vidéo: https://www.youtube.com/watch?v=K4P5DZ9TRns
 
-PORJET 2: Sport
+PORJET 3: Sport
 +Padding
 +Widget
 +Row
++Column
 +GestureDetector
 +Text
 +Box (BoxDecoration, SizedBox, BoxFit)
